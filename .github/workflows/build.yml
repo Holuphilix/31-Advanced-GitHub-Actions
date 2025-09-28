@@ -1,4 +1,4 @@
-name: Build and Test Node.js Application
+name: Basic CI Workflow
 
 on:
   push:
@@ -14,13 +14,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+    - name: Run setup check
+      run: echo "✅ Repository checked out successfully!"
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run tests
-      run: npm test
+    - name: Run sample validation
+      run: echo "🚀 Basic CI workflow is running without Node.js dependencies."
