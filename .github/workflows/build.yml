@@ -13,11 +13,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Run setup check
-      run: echo "✅ Repository checked out successfully!"
+      - name: Run setup check
+        run: echo "✅ Repository checked out successfully!"
 
-    - name: Run sample validation
-      run: echo "🚀 Basic CI workflow is running without Node.js dependencies."
+      - name: Run sample validation
+        run: echo "🚀 Basic CI workflow is running without Node.js dependencies."

@@ -7,50 +7,22 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Cache temp files
-      uses: actions/cache@v3
-      with:
-        path: tmp-cache
-        key: ${{ runner.os }}-basic-cache-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-basic-cache-
+      - name: Cache temp files
+        uses: actions/cache@v3
+        with:
+          path: tmp-cache
+          key: ${{ runner.os }}-basic-cache-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-basic-cache-
 
-    - name: Verify secret
-      run: echo "Secret received successfully: ${{ secrets.ACCESS_TOKEN }}"
+      - name: Verify secret
+        run: echo "Secret received successfully: ${{ secrets.ACCESS_TOKEN }}"
 
-    - name: Run setup check
-      run: echo "✅ Repository checked out successfully!"
+      - name: Run setup check
+        run: echo "✅ Repository checked out successfully!"
 
-    - name: Run sample validation
-      run: echo "🚀 Basic reusable workflow is running with caching enabled."
-name: Basic Checks Workflow
-
-on:
-  workflow_call:
-
-jobs:
-  checks:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Cache temp files
-      uses: actions/cache@v3
-      with:
-        path: tmp-cache
-        key: ${{ runner.os }}-basic-cache-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-basic-cache-
-
-    - name: Verify secret
-      run: echo "Secret received successfully: ${{ secrets.ACCESS_TOKEN }}"
-
-    - name: Run setup check
-      run: echo "✅ Repository checked out successfully!"
-
-    - name: Run sample validation
-      run: echo "🚀 Basic reusable workflow is running with caching enabled."
+      - name: Run sample validation
+        run: echo "🚀 Basic reusable workflow is running with caching enabled."
