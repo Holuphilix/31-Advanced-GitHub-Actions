@@ -1,4 +1,4 @@
-name: Basic CI Workflow
+name: Main CI Workflow
 
 on:
   push:
@@ -9,8 +9,6 @@ on:
 jobs:
   call-basic-checks:
     uses: ./.github/workflows/basic-checks.yml
-    with:
-      access-token: ${{ secrets.ACCESS_TOKEN }}
 
   build:
     runs-on: ubuntu-latest
