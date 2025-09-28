@@ -7,9 +7,11 @@ on:
     branches: [ main ]
 
 jobs:
+  call-basic-checks:
+    uses: ./.github/workflows/basic-checks.yml
+
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
