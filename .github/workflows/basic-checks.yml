@@ -2,6 +2,9 @@ name: Basic Checks Workflow
 
 on:
   workflow_call:
+    secrets:
+      ACCESS_TOKEN:
+        required: true
 
 jobs:
   checks:
@@ -19,7 +22,13 @@ jobs:
             ${{ runner.os }}-basic-cache-
 
       - name: Verify secret
-        run: echo "Secret received successfully: ${{ secrets.ACCESS_TOKEN }}"
+        run: |
+          if [ -z "${{ secrets.ACCESS_TOKEN }}" ]; then
+            echo "❌ Secret is missing!"
+            exit 1
+          else
+            echo "✅ Secret received successfully!"
+          fi
 
       - name: Run setup check
         run: echo "✅ Repository checked out successfully!"
