@@ -7,19 +7,57 @@ on:
     branches: [ main ]
 
 jobs:
-  call-basic-checks:
-    uses: ./.github/workflows/basic-checks.yml
-    secrets:
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
-  build:
+  # Parallel Lint Job
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run setup check
-        run: echo "✅ Repository checked out successfully!"
+      - name: Run linter
+        run: echo "🔍 Running code linting..."
+        # Replace with your actual lint command, e.g., npm run lint
 
-      - name: Run sample validation
-        run: echo "🚀 Basic CI workflow is running without Node.js dependencies."
+  # Parallel Test Job
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        run: echo "✅ Running unit tests..."
+        # Replace with your actual test command, e.g., npm test
+
+  # Reusable Basic Checks Workflow
+  call-basic-checks:
+    uses: ./.github/workflows/basic-checks.yml
+    secrets:
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+  # Matrix Testing Job
+  test-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache Node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Run tests on Node.js ${{ matrix.node-version }}
+        run: echo "✅ Running tests on Node.js ${{ matrix.node-version }}"
+        # Replace with your actual test command, e.g., npm test
