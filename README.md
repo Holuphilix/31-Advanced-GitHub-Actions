@@ -1,4 +1,4 @@
-# **Advanced GitHub Actions and CI/CD Best Practices**
+# **Mini Project: Advanced GitHub Actions and CI/CD Best Practices**
 
 ## **Project Overview**
 
